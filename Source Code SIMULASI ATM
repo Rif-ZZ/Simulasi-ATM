@@ -26,6 +26,7 @@ class MesinATM:
     def tarik_tunai(self, jumlah):
         if jumlah <= self.rekening_data[self.rekening_aktif]["saldo"]:
             self.rekening_data[self.rekening_aktif]["saldo"] -= jumlah
+            self.catat_transaksi("Tarik Tunai", jumlah)
             return True
         else:
             return False
@@ -33,7 +34,21 @@ class MesinATM:
     # function setor tunai
     def setor_tunai(self, jumlah):
         self.rekening_data[self.rekening_aktif]["saldo"] += jumlah
+        self.catat_transaksi("Setor Tunai", jumlah)
 
+    # function mencatat transaksi
+    def catat_transaksi(self, jenis, jumlah):
+        if "riwayat" not in self.rekening_data[self.rekening_aktif]:
+            self.rekening_data[self.rekening_aktif]["riwayat"] = []
+        self.rekening_data[self.rekening_aktif]["riwayat"].append(
+            f"{jenis} : Rp {jumlah}"
+        )
+
+    # function melihat mutasi
+    def lihat_mutasi(self):
+        if "riwayat" not in self.rekening_data[self.rekening_aktif]:
+            return ["Belum ada transaksi"]
+        return self.rekening_data[self.rekening_aktif]["riwayat"]
 
 
 # GUI ATM
@@ -89,6 +104,10 @@ class AplikasiATM:
 
         tk.Button(self.root, text="Setor Tunai", width=25,
                   command=self.menu_setor).pack(pady=5)
+        
+        tk.Button(self.root, text="Mutasi Rekening", width=25,
+                  command=self.menu_mutasi).pack(pady=5)
+
 
         tk.Button(self.root, text="Keluar", width=25,
                   command=self.halaman_login).pack(pady=15)
@@ -143,6 +162,18 @@ class AplikasiATM:
         messagebox.showinfo("Berhasil", "Setor tunai berhasil!")
         self.jendela_setor.destroy()
 
+    # Menu mutasi / riwayat transaksi
+    def menu_mutasi(self):
+        self.jendela_mutasi = tk.Toplevel()
+        self.jendela_mutasi.title("Mutasi Rekening")
+
+        tk.Label(self.jendela_mutasi, text="Riwayat Transaksi", 
+                 font=("Arial", 12, "bold")).pack(pady=10)
+
+        riwayat = self.mesin.lihat_mutasi()
+
+        for item in riwayat:
+            tk.Label(self.jendela_mutasi, text=item).pack(anchor="w", padx=10)
 
 
 if __name__ == "__main__":
