@@ -13,6 +13,7 @@ Pada aplikasi ini, pengguna dapat:
 - Melihat saldo
 - Menabung
 - Menarik uang
+- Melihat mutasi rekening
 - Keluar dari akun
 
 Data rekening disimpan menggunakan dictionary
@@ -26,4 +27,4 @@ Hasil kodingan:
 <img width="413" height="496" alt="Screenshot 2025-11-25 202016" src="https://github.com/user-attachments/assets/407309ff-8ac7-4d44-9a70-2eac05062439" />
 
 - Halaman Page Utama
-<img width="415" height="494" alt="Screenshot 2025-11-25 202025" src="https://github.com/user-attachments/assets/094a4a74-f2f4-49fb-bed8-b10be18ad7d8" />
+<img width="414" height="494" alt="Screenshot 2025-12-05 090123" src="https://github.com/user-attachments/assets/d10b1b7c-d8ba-43bf-8491-6d94bb627628" />
